@@ -14,18 +14,9 @@ build-job:
   script:
     - echo "Compiling the code..."
     - npm install
+    - npm run test
     - npm run compile
     - echo "Compile complete."
-
-test-job:
-  cache:
-    paths:
-      - node_modules/
-  stage: build
-  script:
-    - echo "Running unit tests..."
-    - npm run test
-    - echo "Test complete."
 
 lint-job:
   cache:
