@@ -1,0 +1,39 @@
+image: 'registry.gitlab.com/shardus/dev-container'
+
+before_script:
+  - node -v
+
+stages:
+  - build
+
+build-job:
+  cache:
+    paths:
+      - node_modules/
+  stage: build
+  script:
+    - echo "Compiling the code..."
+    - npm install
+    - npm run compile
+    - echo "Compile complete."
+
+test-job:
+  cache:
+    paths:
+      - node_modules/
+  stage: build
+  script:
+    - echo "Running unit tests..."
+    - npm run test
+    - echo "Test complete."
+
+lint-job:
+  cache:
+    paths:
+      - node_modules/
+  stage: build
+  script:
+    - echo "Running ESlint..."
+    - npm install @typescript-eslint/eslint-plugin@5.48.0 --save-dev
+    - npm run lint
+    - echo "Running ESlint complete."
