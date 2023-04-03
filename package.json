@@ -1,6 +1,9 @@
 {
-  "name": "archiver-discovery",
+  "name": "@shardus/archiver-discovery",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.11.1"
+  },
   "description": "Archiver sudo auto discovery module",
   "main": "index.js",
   "directories": {
