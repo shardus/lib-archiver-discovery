@@ -18,7 +18,7 @@ const getArchiverList = async (opts?: { customConfigPath?: string; customArchive
   const config = await readConfigFromFile({ customConfigPath: opts?.customConfigPath })
 
   const archiverListFromEnv = fetchArchiverListFromEnv({ customEnvName: opts?.customArchiverListEnv })
-  const archiverListFromConfig = await fetchArchiverListFromConfig(config)
+  const archiverListFromConfig = fetchArchiverListFromConfig(config)
   const archiverListFromRemote = await fetchArchiverListFromRemoteOrCache(config)
 
   shuffleList(archiverListFromEnv)

@@ -28,7 +28,7 @@ export const fetchArchiverListFromEnv = (opts?: { customEnvName?: string }): Arc
   })
 }
 
-export const fetchArchiverListFromConfig = async (config: Config): Promise<Archiver[]> => {
+export const fetchArchiverListFromConfig = (config: Config): Archiver[] => {
   if (!config.archivers || config.archivers.length === 0) {
     console.log(`Archivers not found in config`)
     return []
