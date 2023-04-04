@@ -48,10 +48,14 @@ export const getArchiverList = async (opts?: {
   return removeDuplicateArchiversByPubKey(finalArchiverList)
 }
 
-export const setupArchiverDiscovery = async (opts: { hashKey: string; setGlobalArchiverList?: boolean }) => {
+export const setupArchiverDiscovery = async (opts: {
+  hashKey: string
+  disableGlobalArchiverList?: boolean
+}) => {
   // init crypto utils
   crypto.init(opts.hashKey)
-  if (opts.setGlobalArchiverList && opts.setGlobalArchiverList === true) {
+  if (opts.disableGlobalArchiverList === false) {
+    console.log('Fetching active archiver list from global archiver list')
     // init active archiver list
     finalArchiverList = await getArchiverList()
   }

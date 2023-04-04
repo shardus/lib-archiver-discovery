@@ -3,6 +3,7 @@ import { getArchiverList, setupArchiverDiscovery } from '../../src/index'
 test('test getArchiverList with a valid env, invalid config and seed list url', async () => {
   setupArchiverDiscovery({
     hashKey: '69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc',
+    disableGlobalArchiverList: true,
   })
   process.env.ARCHIVER_INFO = '10.11.12.13:8080:randomPublicKey1,10.11.12.14:8081:randomPublicKey2'
   try {
@@ -17,6 +18,7 @@ test('test getArchiverList with a valid env, invalid config and seed list url', 
 test.skip('test getArchiverList with a valid env, invalid config and seed list url', async () => {
   setupArchiverDiscovery({
     hashKey: '69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc',
+    disableGlobalArchiverList: true,
   })
   process.env.ARCHIVER_INFO =
     '127.0.0.1:4000:758b1c119412298802cd28dbfa394cdfeecc4074492d60844cc192d632d84de3'
