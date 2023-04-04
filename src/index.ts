@@ -6,15 +6,16 @@ import {
   fetchArchiverListFromEnv,
   fetchArchiverListFromRemoteOrCache,
 } from './sources'
-import { Archiver } from './types'
+import { Archiver, ArchiverListResponse } from './types'
 import { axiosGet, shuffleList } from './utils'
-
-// init crypto utils
-crypto.init('64f152869ca2d473e4ba64ab53f49ccdb2edae22da192c126850970e788af347')
 
 let finalArchiverList: Archiver[] = []
 
-const getArchiverList = async (opts?: { customConfigPath?: string; customArchiverListEnv?: string }) => {
+export const getArchiverList = async (opts?: {
+  customConfigPath?: string
+  customArchiverListEnv?: string
+  archiverTimeoutInMilliSeconds?: number
+}) => {
   const config = await readConfigFromFile({ customConfigPath: opts?.customConfigPath })
 
   const archiverListFromEnv = fetchArchiverListFromEnv({ customEnvName: opts?.customArchiverListEnv })
@@ -25,30 +26,38 @@ const getArchiverList = async (opts?: { customConfigPath?: string; customArchive
   shuffleList(archiverListFromConfig)
   shuffleList(archiverListFromRemote)
 
-  const combinedArchiverList = [...archiverListFromEnv, ...archiverListFromConfig, ...archiverListFromRemote]
-  sanitizeArchiverList(combinedArchiverList)
+  let combinedArchiverList = [...archiverListFromEnv, ...archiverListFromConfig, ...archiverListFromRemote]
+  combinedArchiverList = sanitizeArchiverList(combinedArchiverList)
 
   if (combinedArchiverList.length === 0) {
     console.log("Couldn't find any archiver")
     throw new Error("Couldn't find any archiver")
   }
 
-  finalArchiverList = removeDuplicateArchiversByPubKey(combinedArchiverList)
+  const finalArchiverList = removeDuplicateArchiversByPubKey(combinedArchiverList)
 
-  const currentArchiverList = await getFromArchiver<Archiver[]>('archivers')
+  const currentArchiverList = await getFromArchiver<ArchiverListResponse>('archivers', {
+    timeout: opts?.archiverTimeoutInMilliSeconds,
+  })
   if (!currentArchiverList) {
     console.log('No archivers responded when fetching current active archivers')
     throw new Error('No archivers responded')
   }
 
-  finalArchiverList.push(...currentArchiverList)
-  finalArchiverList = removeDuplicateArchiversByPubKey(finalArchiverList)
+  finalArchiverList.push(...currentArchiverList.activeArchivers)
+  return removeDuplicateArchiversByPubKey(finalArchiverList)
 }
 
-// Setup archiver list
-getArchiverList()
+export const setupArchiverDiscovery = async (opts: { hashKey: string; setGlobalArchiverList?: boolean }) => {
+  // init crypto utils
+  crypto.init(opts.hashKey)
+  if (opts.setGlobalArchiverList && opts.setGlobalArchiverList === true) {
+    // init active archiver list
+    finalArchiverList = await getArchiverList()
+  }
+}
 
-export const getFromArchiver = async <ResponseType>(
+export const getFromArchiver = async <ResponseType extends crypto.SignedObject>(
   endpoint: string,
   config?: AxiosRequestConfig
 ): Promise<ResponseType | null> => {
@@ -58,6 +67,10 @@ export const getFromArchiver = async <ResponseType>(
       const response = await axiosGet<ResponseType>(url, config)
       if (response.status < 200 || response.status >= 500 || !response.data) {
         console.log(`Failed to fetch data from archiver ${archiver.ip}:${archiver.port}`)
+        continue
+      }
+      if (!crypto.verifyObj(response.data)) {
+        console.log(`Invalid signature when fetching from archiver ${archiver.ip}:${archiver.port}`)
         continue
       }
       finalArchiverList.unshift(archiver)

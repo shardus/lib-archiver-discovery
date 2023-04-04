@@ -51,7 +51,8 @@ export const readConfigFromFile = async (opts?: { customConfigPath?: string }): 
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     jsonData = fs.readFileSync(path, 'utf-8')
   } catch (err) {
-    throw `Unable to read from local config file: ${path} err: ${err}}`
+    console.log(`Unable to read from local config file: ${path} err: ${err}}`)
+    return {}
   }
   return JSON.parse(jsonData) as Config
 }
