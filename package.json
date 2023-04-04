@@ -16,7 +16,8 @@
     "compile": "tsc -p .",
     "start": "node dist/src/index.js",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "release": "np --no-cleanup --no-tests --no-yarn --branch init-version"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "eslint-plugin-security": "^1.7.1",
     "eslint-plugin-xss": "^0.1.12",
     "jest": "^29.5.0",
+    "np": "^7.7.0",
     "ts-jest": "^29.0.5",
     "typescript": "^5.0.2"
   },
