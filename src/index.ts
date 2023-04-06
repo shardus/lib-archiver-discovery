@@ -48,6 +48,15 @@ export const getArchiverList = async (opts?: {
   return removeDuplicateArchiversByPubKey(finalArchiverList)
 }
 
+/**
+ * Sets up the Archiver Discovery component.
+ * This function throws an exception if it could not find any archiver across different config sources (or)
+ * if no archivers responded when fetching the active archiver list.
+ * @async
+ * @param {object} opts - The options for setting up Archiver Discovery.
+ * @param {string} opts.hashKey - The hash key for crypto utils initialisation.
+ * @param {boolean} [opts.disableGlobalArchiverList] - Whether to disable setting the global archiver list (use it with caution).
+ */
 export const setupArchiverDiscovery = async (opts: {
   hashKey: string
   disableGlobalArchiverList?: boolean
@@ -61,6 +70,14 @@ export const setupArchiverDiscovery = async (opts: {
   }
 }
 
+/**
+ * Sends a GET request to an Archiver endpoint and returns the response as a verified SignedObject.
+ * @async
+ * @template ResponseType - The type of the response data, which should extend crypto.SignedObject.
+ * @param {string} endpoint - The Archiver endpoint to query. This should not include a preceding '/'.
+ * @param {AxiosRequestConfig} [config] - Optional Axios request configuration.
+ * @returns {Promise<ResponseType | null>} A promise that resolves with the response data as a SignedObject, or null if an error occurred.
+ */
 export const getFromArchiver = async <ResponseType extends crypto.SignedObject>(
   endpoint: string,
   config?: AxiosRequestConfig
