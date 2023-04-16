@@ -2,6 +2,9 @@ import * as fs from 'fs'
 import { Archiver, Config } from './types'
 import { isValidIPv4 } from './utils'
 
+// remove duplicates based on public key
+// remove later duplicates
+// Example: [A, B, C, D, B, E] becomes [A, B, C, D, E] and not [A, C, D, B, E]
 export const removeDuplicateArchiversByPubKey = (archiverList: Archiver[]): Archiver[] => {
   const uniqueArchiverPubKeyList = new Set<string>()
   return archiverList.filter((archiver) => {
