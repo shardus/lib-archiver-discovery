@@ -56,17 +56,29 @@ export const getArchiverList = async (opts?: {
  * @param {object} opts - The options for setting up Archiver Discovery.
  * @param {string} opts.hashKey - The hash key for crypto utils initialisation.
  * @param {boolean} [opts.disableGlobalArchiverList] - Whether to disable setting the global archiver list (use it with caution).
+ * @param {string} [opts.customConfigPath] - The path to the custom config file.
+ * @param {string} [opts.customArchiverListEnv] - The name of the custom environment variable for archiver list.
+ * @param {number} [opts.archiverTimeoutInMilliSeconds] - The timeout for archiver request in milliseconds.
  */
 export const setupArchiverDiscovery = async (opts: {
-  hashKey: string
+  hashKey?: string
   disableGlobalArchiverList?: boolean
+  customConfigPath?: string
+  customArchiverListEnv?: string
+  archiverTimeoutInMilliSeconds?: number
 }) => {
   // init crypto utils
-  crypto.init(opts.hashKey)
+  crypto.init(
+    opts.hashKey ? opts.hashKey : '69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc'
+  )
   if (opts.disableGlobalArchiverList === false) {
     console.log('Fetching active archiver list from global archiver list')
     // init active archiver list
-    finalArchiverList = await getArchiverList()
+    finalArchiverList = await getArchiverList({
+      customConfigPath: opts.customConfigPath,
+      customArchiverListEnv: opts.customArchiverListEnv,
+      archiverTimeoutInMilliSeconds: opts.archiverTimeoutInMilliSeconds,
+    })
   }
 }
 
