@@ -71,8 +71,7 @@ export const setupArchiverDiscovery = async (opts: {
   crypto.init(
     opts.hashKey ? opts.hashKey : '69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc'
   )
-  if (opts.disableGlobalArchiverList === false) {
-    console.log('Fetching active archiver list from global archiver list')
+  if (!opts.disableGlobalArchiverList) {
     // init active archiver list
     finalArchiverList = await getArchiverList({
       customConfigPath: opts.customConfigPath,
