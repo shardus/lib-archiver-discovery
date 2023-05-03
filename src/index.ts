@@ -34,7 +34,7 @@ export const getArchiverList = async (opts?: {
     throw new Error("Couldn't find any archiver")
   }
 
-  const finalArchiverList = removeDuplicateArchiversByPubKey(combinedArchiverList)
+  finalArchiverList = removeDuplicateArchiversByPubKey(combinedArchiverList)
 
   const currentArchiverList = await getFromArchiver<ArchiverListResponse>('archivers', {
     timeout: opts?.archiverTimeoutInMilliSeconds,
