@@ -1,17 +1,21 @@
 {
   "name": "@shardus/archiver-discovery",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "node": "16.11.1"
   },
   "description": "Archiver sudo auto discovery module",
   "main": "./dist/src/index.js",
+  "files": [
+    "dist/"
+  ],
   "directories": {
     "test": "test"
   },
   "scripts": {
     "lint": "eslint './src/**/*.ts'",
     "prepare": "npm run compile",
+    "prepublish": "npm run compile",
     "pretest": "npm run compile",
     "compile": "tsc -p .",
     "start": "node dist/src/index.js",
