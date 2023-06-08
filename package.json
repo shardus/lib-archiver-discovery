@@ -13,7 +13,8 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "eslint './src/**/*.ts'",
+    "lint-check": "eslint './src/**/*.ts'",
+    "format-check": "prettier --check './src/**/*.ts'",
     "prepare": "npm run compile",
     "prepublish": "npm run compile",
     "pretest": "npm run compile",

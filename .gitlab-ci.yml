@@ -18,7 +18,7 @@ build-job:
     - npm run compile
     - echo "Compile complete."
 
-lint-job:
+lint-checker-job:
   cache:
     paths:
       - node_modules/
@@ -26,5 +26,16 @@ lint-job:
   script:
     - echo "Running ESlint..."
     - npm install @typescript-eslint/eslint-plugin@5.48.0 --save-dev
-    - npm run lint
+    - npm run lint-check
     - echo "Running ESlint complete."
+
+format-checker-job:
+  cache:
+    paths:
+      - node_modules/
+  stage: build
+  script:
+    - echo "Running Prettier..."
+    - npm install prettier --save-dev
+    - npm run format-check
+    - echo "Running Prettier complete."
