@@ -41,7 +41,7 @@ export const sanitizeArchiverList = (archivers: Archiver[]): Archiver[] => {
       validateArchiver(archiver)
       result.push(archiver)
     } catch (err) {
-      console.log(`Invalid archiver: ${archiver}`)
+      console.log(`Invalid archiver: ${JSON.stringify(archiver)} err: ${err}`)
     }
   }
   return result
