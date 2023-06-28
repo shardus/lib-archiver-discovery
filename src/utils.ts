@@ -2,6 +2,9 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import * as fs from 'fs'
 
 export const isValidIPv4 = (ip: string): boolean => {
+  if (ip === 'localhost') {
+    return true
+  }
   const parts = ip.split('.')
   if (parts.length !== 4) {
     return false
