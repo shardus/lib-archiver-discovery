@@ -29,7 +29,12 @@ export const getArchiverList = async (opts?: {
   shuffleList(archiverListFromRemote)
   shuffleList(archiverListFromCustomList)
 
-  let combinedArchiverList = [...archiverListFromEnv, ...archiverListFromConfig, ...archiverListFromRemote, ...archiverListFromCustomList]
+  let combinedArchiverList = [
+    ...archiverListFromEnv,
+    ...archiverListFromConfig,
+    ...archiverListFromRemote,
+    ...archiverListFromCustomList,
+  ]
   combinedArchiverList = sanitizeArchiverList(combinedArchiverList)
 
   if (combinedArchiverList.length === 0) {
