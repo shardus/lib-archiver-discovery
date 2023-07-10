@@ -15,18 +15,21 @@ export const getArchiverList = async (opts?: {
   customConfigPath?: string
   customArchiverListEnv?: string
   archiverTimeoutInMilliSeconds?: number
+  customArchiverList?: Archiver[]
 }) => {
   const config = await readConfigFromFile({ customConfigPath: opts?.customConfigPath })
 
   const archiverListFromEnv = fetchArchiverListFromEnv({ customEnvName: opts?.customArchiverListEnv })
   const archiverListFromConfig = fetchArchiverListFromConfig(config)
   const archiverListFromRemote = await fetchArchiverListFromRemoteOrCache(config)
+  const archiverListFromCustomList = opts?.customArchiverList || []
 
   shuffleList(archiverListFromEnv)
   shuffleList(archiverListFromConfig)
   shuffleList(archiverListFromRemote)
+  shuffleList(archiverListFromCustomList)
 
-  let combinedArchiverList = [...archiverListFromEnv, ...archiverListFromConfig, ...archiverListFromRemote]
+  let combinedArchiverList = [...archiverListFromEnv, ...archiverListFromConfig, ...archiverListFromRemote, ...archiverListFromCustomList]
   combinedArchiverList = sanitizeArchiverList(combinedArchiverList)
 
   if (combinedArchiverList.length === 0) {
@@ -66,6 +69,7 @@ export const setupArchiverDiscovery = async (opts: {
   customConfigPath?: string
   customArchiverListEnv?: string
   archiverTimeoutInMilliSeconds?: number
+  customArchiverList?: Archiver[]
 }) => {
   // init crypto utils
   crypto.init(
@@ -77,6 +81,7 @@ export const setupArchiverDiscovery = async (opts: {
       customConfigPath: opts.customConfigPath,
       customArchiverListEnv: opts.customArchiverListEnv,
       archiverTimeoutInMilliSeconds: opts.archiverTimeoutInMilliSeconds,
+      customArchiverList: opts.customArchiverList,
     })
   }
 }
@@ -114,3 +119,10 @@ export const getFromArchiver = async <ResponseType extends crypto.SignedObject>(
   }
   return null
 }
+
+/**
+ * Returns the list of archivers that were discovered after setupArchiverDiscovery.
+ *
+ * @returns {Archiver[]} The list of archivers.
+ */
+export const getFinalArchiverList = () => finalArchiverList
