@@ -82,6 +82,14 @@ export const setupArchiverDiscovery = async (opts: {
 }
 
 /**
+ * Requires setupArchiverDiscovery to be called before this function.
+ * @returns {Archiver[]} The final list of archivers.
+ */
+export const getFinalArchiverList = (): Archiver[] => {
+  return finalArchiverList
+}
+
+/**
  * Sends a GET request to an Archiver endpoint and returns the response as a verified SignedObject.
  * @async
  * @template ResponseType - The type of the response data, which should extend crypto.SignedObject.
