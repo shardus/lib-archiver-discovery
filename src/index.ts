@@ -83,9 +83,13 @@ export const setupArchiverDiscovery = async (opts: {
 
 /**
  * Requires setupArchiverDiscovery to be called before this function.
+ * Throws an exception if setupArchiverDiscovery has not been called or if it failed to find any archiver.
  * @returns {Archiver[]} The final list of archivers.
  */
 export const getFinalArchiverList = (): Archiver[] => {
+  if (finalArchiverList.length === 0) {
+    throw new Error('Archiver Discovery has not been setup')
+  }
   return finalArchiverList
 }
 
