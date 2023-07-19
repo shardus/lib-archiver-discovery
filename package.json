@@ -19,7 +19,7 @@
     "start": "node dist/src/index.js",
     "test": "jest",
     "test-watch": "jest --watch",
-    "release": "np --no-cleanup --no-tests --no-yarn --branch main"
+    "release": "np --no-cleanup --no-tests --no-yarn"
   },
   "repository": {
     "type": "git",
