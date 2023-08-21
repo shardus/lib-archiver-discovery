@@ -10,7 +10,6 @@
     "test": "test"
   },
   "scripts": {
-    "lint-check": "eslint './src/**/*.ts'",
     "lint": "eslint './src/**/*.ts'",
     "lint-windows": "eslint ./src/**/*.ts",
     "format-check": "prettier --check './src/**/*.ts'",
@@ -25,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/shardus/archiver-discovery.git"
+    "url": "https://gitlab.com/shardus/archiver-discovery.git"
   },
   "bugs": {
     "url": "https://gitlab.com/shardus/archiver-discovery/issues"
