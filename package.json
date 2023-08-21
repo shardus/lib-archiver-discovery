@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/shardus/archiver-discovery.git"
+    "url": "git+https://gitlab.com/shardus/archiver-discovery.git"
   },
   "bugs": {
     "url": "https://gitlab.com/shardus/archiver-discovery/issues"
@@ -34,7 +34,7 @@
     "@types/node": "18.16.1",
     "@typescript-eslint/eslint-plugin": "5.57.0",
     "@typescript-eslint/parser": "5.57.0",
-    "eslint": "8.37.0",
+    "eslint": "^8.47.0",
     "eslint-plugin-no-unsanitized": "4.0.2",
     "eslint-plugin-security": "1.7.1",
     "eslint-plugin-xss": "0.1.12",
@@ -54,4 +54,8 @@
     "word-wrap": "1.2.4",
     "got": "11.8.5"
   }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
