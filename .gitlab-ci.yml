@@ -30,7 +30,7 @@ lint-checker-job:
   script:
     - echo "Running ESlint..."
     - npm install @typescript-eslint/eslint-plugin@5.48.0 --save-dev
-    - npm run lint-check
+    - npm run lint
     - echo "Running ESlint complete."
 
 format-checker-job:
