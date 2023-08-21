@@ -2,6 +2,7 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "env": {
+    //"browser": true,
     "node": true
   },
   "plugins": ["@typescript-eslint", "security", "xss"],
@@ -10,10 +11,10 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:security/recommended",
-    "plugin:no-unsanitized/DOM",
-    "prettier"
+    "plugin:no-unsanitized/DOM"
+ //   "prettier"
   ],
-  "ignorePatterns": [],
+  "ignorePatterns": ["**/evm/precompiles/**"],
   "rules": {
     "no-empty": [
       1,
@@ -23,6 +24,7 @@
     ],
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/member-delimiter-style": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/explicit-function-return-type": "error"
   }
 }
