@@ -11,6 +11,8 @@
   },
   "scripts": {
     "lint-check": "eslint './src/**/*.ts'",
+    "lint": "eslint './src/**/*.ts'",
+    "lint-windows": "eslint ./src/**/*.ts",
     "format-check": "prettier --check './src/**/*.ts'",
     "prepare": "npm run compile",
     "prepublish": "npm run compile",

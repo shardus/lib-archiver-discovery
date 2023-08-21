@@ -11,10 +11,10 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:security/recommended",
-    "plugin:no-unsanitized/DOM"
- //   "prettier"
+    "plugin:no-unsanitized/DOM",
+    "prettier"
   ],
-  "ignorePatterns": ["**/evm/precompiles/**"],
+  "ignorePatterns": ["**/evm/precompiles/**", "src/helpers.ts", "src/index.ts", "src/utils.ts"],
   "rules": {
     "no-empty": [
       1,
