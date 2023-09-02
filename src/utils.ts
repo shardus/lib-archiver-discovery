@@ -15,7 +15,7 @@ export const isValidIPv4 = (ip: string): boolean => {
   })
 }
 
-export const downloadAndSaveJsonFile = async (url: string, filePath: string) => {
+export const downloadAndSaveJsonFile = async (url: string, filePath: string): Promise<void> => {
   try {
     const response = await axios.get(url)
     const jsonData = response.data

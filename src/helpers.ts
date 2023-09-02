@@ -16,7 +16,7 @@ export const removeDuplicateArchiversByPubKey = (archiverList: Archiver[]): Arch
   })
 }
 
-export const validateArchiver = (archiver: Archiver) => {
+export const validateArchiver = (archiver: Archiver): void => {
   if (!archiver.ip) {
     throw new Error('Archiver ip is not defined')
   }

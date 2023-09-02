@@ -16,7 +16,7 @@ export const getArchiverList = async (opts?: {
   customArchiverListEnv?: string
   archiverTimeoutInMilliSeconds?: number
   customArchiverList?: Archiver[]
-}) => {
+}): Promise<Archiver[]> => {
   const config = await readConfigFromFile({ customConfigPath: opts?.customConfigPath })
 
   const archiverListFromEnv = fetchArchiverListFromEnv({ customEnvName: opts?.customArchiverListEnv })
@@ -75,7 +75,7 @@ export const setupArchiverDiscovery = async (opts: {
   customArchiverListEnv?: string
   archiverTimeoutInMilliSeconds?: number
   customArchiverList?: Archiver[]
-}) => {
+}): Promise<void> => {
   // init crypto utils
   crypto.init(
     opts.hashKey ? opts.hashKey : '69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc'
@@ -130,4 +130,4 @@ export const getFromArchiver = async <ResponseType extends crypto.SignedObject>(
  *
  * @returns {Archiver[]} The list of archivers.
  */
-export const getFinalArchiverList = () => finalArchiverList
+export const getFinalArchiverList = (): Archiver[] => finalArchiverList
