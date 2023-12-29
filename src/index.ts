@@ -47,6 +47,7 @@ export const getArchiverList = async (opts?: {
   const currentArchiverList = await getFromArchiver<ArchiverListResponse>('archivers', {
     timeout: opts?.archiverTimeoutInMilliSeconds,
   })
+  
   if (!currentArchiverList) {
     console.log('No archivers responded when fetching current active archivers')
     throw new Error('No archivers responded')
