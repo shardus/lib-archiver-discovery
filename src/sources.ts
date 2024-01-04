@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import { Archiver, Config } from './types'
 import { downloadAndSaveJsonFile } from './utils'
+import { projectFlags } from './config/projectFlags'
 
 export const fetchArchiverListFromEnv = (opts?: { customEnvName?: string }): Archiver[] => {
   const envName = opts?.customEnvName || 'ARCHIVER_INFO'
@@ -59,7 +60,7 @@ export const fetchArchiverListFromRemoteOrCache = async (
     console.log(`Archivers URL not found in config`)
     return []
   }
-  const cacheFilePath = opts?.customCacheFilePath || './archiver_seed_list.json'
+  const cacheFilePath = opts?.customCacheFilePath || projectFlags.ARCHIVER_SEED_LIST_PATH
   await downloadAndSaveJsonFile(config.archiversUrl, cacheFilePath)
   return readArchiverListFromLocalCache(cacheFilePath)
 }
