@@ -53,7 +53,8 @@
     "@babel/traverse": "7.23.2",
     "semver": "5.7.2",
     "word-wrap": "1.2.4",
-    "got": "11.8.5"
+    "got": "11.8.5",
+    "follow-redirects": "1.15.4"
   },
   "keywords": [],
   "author": "",
