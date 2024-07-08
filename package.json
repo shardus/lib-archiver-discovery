@@ -10,9 +10,9 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "eslint './src/**/*.ts'",
-    "lint-windows": "eslint ./src/**/*.ts",
+    "lint": "eslint \"./src/**/*.ts\"",
     "format-check": "prettier --check './src/**/*.ts'",
+    "format-fix": "prettier --write './src/**/*.ts'",
     "prepare": "npm run compile",
     "prepublish": "npm run compile",
     "pretest": "npm run compile",
