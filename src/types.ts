@@ -1,4 +1,4 @@
-import { Signature } from '@shardus/crypto-utils'
+import { Signature } from '@shardeum-foundation/crypto-utils'
 
 export interface Archiver {
   ip: string
