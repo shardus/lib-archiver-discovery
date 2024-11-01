@@ -26,6 +26,9 @@
     "type": "git",
     "url": "https://gitlab.com/shardeum/archiver-discovery.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://gitlab.com/shardus/archiver-discovery/issues"
   },
