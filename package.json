@@ -1,5 +1,5 @@
 {
-  "name": "@shardeum-foundation/archiver-discovery",
+  "name": "@shardus/archiver-discovery",
   "version": "1.1.0",
   "description": "Archiver sudo auto discovery module",
   "main": "./dist/src/index.js",
@@ -24,15 +24,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/shardeum/archiver-discovery.git"
+    "url": "https://github.com/shardeum/lib-archiver-discovery"
   },
   "publishConfig": {
     "access": "public"
   },
   "bugs": {
-    "url": "https://gitlab.com/shardus/archiver-discovery/issues"
+    "url": "https://github.com/shardeum/lib-archiver-discovery/issues"
   },
-  "homepage": "https://gitlab.com/shardus/archiver-discovery#readme",
+  "homepage": "https://github.com/shardeum/lib-archiver-discovery#readme",
   "devDependencies": {
     "@types/jest": "29.5.0",
     "@types/node": "18.16.1",
@@ -48,7 +48,7 @@
     "typescript": "5.0.2"
   },
   "dependencies": {
-    "@shardeum-foundation/crypto-utils": "4.1.3",
+    "@shardus/crypto-utils": "git+https://github.com/shardeum/lib-crypto-utils#v4.1.3",
     "axios": "1.6.1",
     "gts": "3.1.1"
   },
