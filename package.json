@@ -35,7 +35,7 @@
   "homepage": "https://github.com/shardeum/lib-archiver-discovery#readme",
   "devDependencies": {
     "@types/jest": "29.5.0",
-    "@types/node": "18.16.1",
+    "@types/node": "18.19.1",
     "@typescript-eslint/eslint-plugin": "5.57.0",
     "@typescript-eslint/parser": "5.57.0",
     "eslint": "8.47.0",
