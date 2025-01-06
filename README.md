@@ -67,13 +67,13 @@ The final list of archivers is created by shuffling and concatenating the indepe
 ### Install the module
 
 ```bash
-npm i @shardus/archiver-discovery
+npm i @shardeum-foundation/lib-archiver-discovery
 ```
 
 ### Initialising the module
 
 ```ts
-import { setupArchiverDiscovery, getFromArchiver } from '@shardus/archiver-discovery'
+import { setupArchiverDiscovery, getFromArchiver } from '@shardeum-foundation/lib-archiver-discovery'
 
 // This function throws an exception if it could not find any archiver across different config
 // sources (or) if no archivers responded when fetching the active archiver list.
