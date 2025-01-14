@@ -51,7 +51,7 @@
     "typescript": "5.0.2"
   },
   "dependencies": {
-    "@shardeum-foundation/lib-crypto-utils": "4.1.6-prerelease.0",
+    "@shardeum-foundation/lib-crypto-utils": "4.1.7",
     "axios": "1.6.1",
     "gts": "3.1.1"
   },
