@@ -1,11 +1,7 @@
 import * as crypto from '@shardeum-foundation/lib-crypto-utils'
 import { AxiosRequestConfig } from 'axios'
 import { readConfigFromFile, removeDuplicateArchiversByPubKey, sanitizeArchiverList } from './helpers'
-import {
-  fetchArchiverListFromConfig,
-  fetchArchiverListFromEnv,
-  fetchArchiverListFromRemoteOrCache,
-} from './sources'
+import { fetchArchiverListFromConfig, fetchArchiverListFromEnv, fetchArchiverListFromRemoteOrCache } from './sources'
 import { Archiver, ArchiverListResponse } from './types'
 import { axiosGet, shuffleList } from './utils'
 
@@ -78,9 +74,7 @@ export const setupArchiverDiscovery = async (opts: {
   customArchiverList?: Archiver[]
 }): Promise<void> => {
   // init crypto utils
-  crypto.init(
-    opts.hashKey ? opts.hashKey : '69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc'
-  )
+  crypto.init(opts.hashKey ? opts.hashKey : '69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc')
   if (!opts.disableGlobalArchiverList) {
     // init active archiver list
     finalArchiverList = await getArchiverList({
