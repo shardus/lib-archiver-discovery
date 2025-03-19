@@ -18,8 +18,7 @@ test.skip('test getArchiverList with a valid env, invalid config and seed list u
   await setupArchiverDiscovery({
     disableGlobalArchiverList: true,
   })
-  process.env.ARCHIVER_INFO =
-    '127.0.0.1:4000:758b1c119412298802cd28dbfa394cdfeecc4074492d60844cc192d632d84de3'
+  process.env.ARCHIVER_INFO = '127.0.0.1:4000:758b1c119412298802cd28dbfa394cdfeecc4074492d60844cc192d632d84de3'
   await getArchiverList({ archiverTimeoutInMilliSeconds: 1000 })
 })
 
