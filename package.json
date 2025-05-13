@@ -1,6 +1,6 @@
 {
   "name": "@shardeum-foundation/lib-archiver-discovery",
-  "version": "1.3.0-prerelease.1",
+  "version": "1.3.0",
   "description": "Archiver sudo auto discovery module",
   "main": "./dist/src/index.js",
   "files": [
