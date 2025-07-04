@@ -10,6 +10,10 @@ export const isValidIPv4 = (ip: string): boolean => {
     return false
   }
   return parts.every((part) => {
+    // Check if part contains only digits
+    if (!/^\d+$/.test(part)) {
+      return false
+    }
     const num = parseInt(part, 10)
     return num >= 0 && num <= 255
   })

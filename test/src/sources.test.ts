@@ -29,6 +29,18 @@ test('test fetchArchiverListFromEnv with env empty', () => {
   expect(archiverList).toHaveLength(0)
 })
 
+test('test fetchArchiverListFromEnv with whitespace only entries', () => {
+  process.env.ARCHIVER_INFO = '   ,  ,   '
+  const archiverList = fetchArchiverListFromEnv()
+
+  // validations
+  expect(archiverList).toHaveLength(3) // Will have 3 entries but with incomplete data
+  // Each entry will be missing proper values due to whitespace-only content
+  expect(archiverList[0].ip).toBe('')
+  expect(archiverList[0].port).toBeNaN()
+  expect(archiverList[0].publicKey).toBeUndefined()
+})
+
 test('test fetchArchiverListFromConfig with valid input', () => {
   const config = {
     archivers: [

@@ -20,6 +20,7 @@
     "start": "node dist/src/index.js",
     "test": "jest",
     "test-watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "release:prepatch": "npm run prepare && npm version prepatch --preid=prerelease && git push --follow-tags && npm publish --tag prerelease",
     "release:preminor": "npm run prepare && npm version preminor --preid=prerelease && git push --follow-tags && npm publish --tag prerelease",
     "release:premajor": "npm run prepare && npm version premajor --preid=prerelease && git push --follow-tags && npm publish --tag prerelease",
