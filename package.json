@@ -54,8 +54,11 @@
     "ts-jest": "29.0.5",
     "typescript": "5.0.2"
   },
+  "engines": {
+    "node": "20.19.3"
+  },
   "dependencies": {
-    "@shardeum-foundation/lib-crypto-utils": "4.3.0",
+    "@shardeum-foundation/lib-crypto-utils": "4.3.2",
     "axios": "1.6.1",
     "gts": "3.1.1"
   },
