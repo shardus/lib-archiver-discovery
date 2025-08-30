@@ -36,13 +36,13 @@ describe('index tests', () => {
   const mockCrypto = crypto as jest.Mocked<typeof crypto>
   const mockAxiosGet = axiosGet as jest.MockedFunction<typeof axiosGet>
   const mockShuffleList = shuffleList as jest.MockedFunction<typeof shuffleList>
-  
+
   beforeEach(() => {
     // Clear all mocks
     jest.clearAllMocks()
     // Reset environment
     process.env = { ...originalEnv }
-    
+
     // Setup default mocks
     mockFs.readFileSync.mockReturnValue(JSON.stringify({}))
     mockAxiosGet.mockRejectedValue(new Error('Not mocked'))
@@ -93,7 +93,7 @@ describe('index tests', () => {
         { ip: '192.168.1.1', port: 8080, publicKey: 'key1' },
         { ip: '192.168.1.2', port: 8081, publicKey: 'key2' },
       ]
-      
+
       const mockResponse: ArchiverListResponse = {
         activeArchivers: [],
         sign: { owner: '', sig: '' },
@@ -109,9 +109,9 @@ describe('index tests', () => {
           status: 200,
           data: mockResponse,
         } as any)
-      
+
       mockCrypto.verifyObj.mockReturnValue(true)
-      
+
       await setupArchiverDiscovery({
         disableGlobalArchiverList: false,
         customArchiverList: mockArchivers,
@@ -120,10 +120,7 @@ describe('index tests', () => {
       const result = await getFromArchiver<ArchiverListResponse>('test-endpoint')
 
       expect(result).toEqual(mockResponse)
-      expect(mockAxiosGet).toHaveBeenCalledWith(
-        'http://192.168.1.1:8080/test-endpoint',
-        undefined
-      )
+      expect(mockAxiosGet).toHaveBeenCalledWith('http://192.168.1.1:8080/test-endpoint', undefined)
       expect(mockCrypto.verifyObj).toHaveBeenCalledWith(mockResponse)
     })
 
@@ -132,7 +129,7 @@ describe('index tests', () => {
         { ip: '192.168.1.1', port: 8080, publicKey: 'key1' },
         { ip: '192.168.1.2', port: 8081, publicKey: 'key2' },
       ]
-      
+
       const mockResponse: ArchiverListResponse = {
         activeArchivers: [],
         sign: { owner: '', sig: '' },
@@ -147,14 +144,14 @@ describe('index tests', () => {
 
       // First archiver fails
       mockAxiosGet.mockRejectedValueOnce(new Error('Network error'))
-      
+
       // Second archiver succeeds
       mockAxiosGet.mockResolvedValueOnce({
         status: 200,
         data: mockResponse,
       } as any)
       mockCrypto.verifyObj.mockReturnValueOnce(true)
-      
+
       await setupArchiverDiscovery({
         disableGlobalArchiverList: false,
         customArchiverList: mockArchivers,
@@ -171,7 +168,7 @@ describe('index tests', () => {
         { ip: '192.168.1.1', port: 8080, publicKey: 'key1' },
         { ip: '192.168.1.2', port: 8081, publicKey: 'key2' },
       ]
-      
+
       // Setup call
       mockAxiosGet.mockResolvedValueOnce({
         status: 200,
@@ -181,7 +178,7 @@ describe('index tests', () => {
 
       // Both archivers fail
       mockAxiosGet.mockRejectedValue(new Error('Network error'))
-      
+
       await setupArchiverDiscovery({
         disableGlobalArchiverList: false,
         customArchiverList: mockArchivers,
@@ -197,7 +194,7 @@ describe('index tests', () => {
         { ip: '192.168.1.1', port: 8080, publicKey: 'key1' },
         { ip: '192.168.1.2', port: 8081, publicKey: 'key2' },
       ]
-      
+
       const mockResponse: ArchiverListResponse = {
         activeArchivers: [],
         sign: { owner: '', sig: '' },
@@ -223,7 +220,7 @@ describe('index tests', () => {
         data: mockResponse,
       } as any)
       mockCrypto.verifyObj.mockReturnValueOnce(true)
-      
+
       await setupArchiverDiscovery({
         disableGlobalArchiverList: false,
         customArchiverList: mockArchivers,
@@ -240,7 +237,7 @@ describe('index tests', () => {
         { ip: '192.168.1.1', port: 8080, publicKey: 'key1' },
         { ip: '192.168.1.2', port: 8081, publicKey: 'key2' },
       ]
-      
+
       const mockResponse: ArchiverListResponse = {
         activeArchivers: [],
         sign: { owner: '', sig: '' },
@@ -265,7 +262,7 @@ describe('index tests', () => {
         data: mockResponse,
       } as any)
       mockCrypto.verifyObj.mockReturnValueOnce(true)
-      
+
       await setupArchiverDiscovery({
         disableGlobalArchiverList: false,
         customArchiverList: mockArchivers,
@@ -277,10 +274,8 @@ describe('index tests', () => {
     })
 
     it('should pass config to axiosGet', async () => {
-      const mockArchivers: Archiver[] = [
-        { ip: '192.168.1.1', port: 8080, publicKey: 'key1' },
-      ]
-      
+      const mockArchivers: Archiver[] = [{ ip: '192.168.1.1', port: 8080, publicKey: 'key1' }]
+
       const mockResponse: ArchiverListResponse = {
         activeArchivers: [],
         sign: { owner: '', sig: '' },
@@ -299,7 +294,7 @@ describe('index tests', () => {
         data: mockResponse,
       } as any)
       mockCrypto.verifyObj.mockReturnValueOnce(true)
-      
+
       await setupArchiverDiscovery({
         disableGlobalArchiverList: false,
         customArchiverList: mockArchivers,
@@ -308,10 +303,7 @@ describe('index tests', () => {
       const config = { timeout: 5000, headers: { 'X-Custom': 'test' } }
       await getFromArchiver<ArchiverListResponse>('test-endpoint', config)
 
-      expect(mockAxiosGet).toHaveBeenCalledWith(
-        'http://192.168.1.1:8080/test-endpoint',
-        config
-      )
+      expect(mockAxiosGet).toHaveBeenCalledWith('http://192.168.1.1:8080/test-endpoint', config)
     })
 
     it('should reorder archivers putting successful one first', async () => {
@@ -320,7 +312,7 @@ describe('index tests', () => {
         { ip: '192.168.1.2', port: 8081, publicKey: 'key2' },
         { ip: '192.168.1.3', port: 8082, publicKey: 'key3' },
       ]
-      
+
       const mockResponse: ArchiverListResponse = {
         activeArchivers: [],
         sign: { owner: '', sig: '' },
@@ -335,14 +327,14 @@ describe('index tests', () => {
 
       // First archiver fails
       mockAxiosGet.mockRejectedValueOnce(new Error('Network error'))
-      
+
       // Second archiver succeeds
       mockAxiosGet.mockResolvedValueOnce({
         status: 200,
         data: mockResponse,
       } as any)
       mockCrypto.verifyObj.mockReturnValueOnce(true)
-      
+
       await setupArchiverDiscovery({
         disableGlobalArchiverList: false,
         customArchiverList: mockArchivers,
@@ -362,9 +354,11 @@ describe('index tests', () => {
       delete process.env.ARCHIVER_INFO // No env
       mockAxiosGet.mockRejectedValue(new Error('Network error')) // No remote
 
-      await expect(setupArchiverDiscovery({
-        disableGlobalArchiverList: false, // Changed to false to trigger getArchiverList
-      })).rejects.toThrow("Couldn't find any archiver")
+      await expect(
+        setupArchiverDiscovery({
+          disableGlobalArchiverList: false, // Changed to false to trigger getArchiverList
+        })
+      ).rejects.toThrow("Couldn't find any archiver")
     })
   })
 
@@ -386,9 +380,7 @@ describe('index tests', () => {
       mockAxiosGet.mockResolvedValueOnce({
         status: 200,
         data: {
-          activeArchivers: [
-            { ip: '192.168.1.3', port: 8082, publicKey: 'key3' },
-          ],
+          activeArchivers: [{ ip: '192.168.1.3', port: 8082, publicKey: 'key3' }],
           sign: { owner: '', sig: '' },
         },
       } as any)
@@ -409,16 +401,15 @@ describe('index tests', () => {
       // Run this test in isolation to ensure clean global state
       await jest.isolateModulesAsync(async () => {
         jest.resetModules()
-        
+
         // Re-import the functions with fresh state
-        const { setupArchiverDiscovery: setupFresh, getFinalArchiverList: getFinalFresh } = 
-          require('../../src/index')
-        
+        const { setupArchiverDiscovery: setupFresh, getFinalArchiverList: getFinalFresh } = require('../../src/index')
+
         // Re-setup mocks for the fresh modules
         const freshCrypto = require('@shardeum-foundation/lib-crypto-utils')
         freshCrypto.init = jest.fn()
         freshCrypto.verifyObj = jest.fn()
-        
+
         await setupFresh({
           disableGlobalArchiverList: true,
         })
