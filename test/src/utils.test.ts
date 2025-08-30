@@ -99,9 +99,7 @@ describe('utils', () => {
       await downloadAndSaveJsonFile('http://example.com/data.json', '/path/to/file.json')
 
       expect(mockAxios.get).toHaveBeenCalledWith('http://example.com/data.json')
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Failed to download and save JSON data')
-      )
+      expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('Failed to download and save JSON data'))
     })
 
     it('should handle empty response data', async () => {
@@ -109,11 +107,7 @@ describe('utils', () => {
 
       await downloadAndSaveJsonFile('http://example.com/data.json', '/path/to/file.json')
 
-      expect(mockFs.writeFileSync).toHaveBeenCalledWith(
-        '/path/to/file.json',
-        'null',
-        'utf-8'
-      )
+      expect(mockFs.writeFileSync).toHaveBeenCalledWith('/path/to/file.json', 'null', 'utf-8')
     })
 
     it('should format JSON with proper indentation', async () => {
@@ -123,11 +117,7 @@ describe('utils', () => {
       await downloadAndSaveJsonFile('http://example.com/data.json', '/path/to/file.json')
 
       const expectedJson = JSON.stringify(mockData, null, 2)
-      expect(mockFs.writeFileSync).toHaveBeenCalledWith(
-        '/path/to/file.json',
-        expectedJson,
-        'utf-8'
-      )
+      expect(mockFs.writeFileSync).toHaveBeenCalledWith('/path/to/file.json', expectedJson, 'utf-8')
     })
   })
 
@@ -156,9 +146,9 @@ describe('utils', () => {
       const shuffled = shuffleList(original)
 
       expect(shuffled).toHaveLength(6)
-      expect(shuffled.filter(x => x === 1)).toHaveLength(1)
-      expect(shuffled.filter(x => x === 2)).toHaveLength(2)
-      expect(shuffled.filter(x => x === 3)).toHaveLength(3)
+      expect(shuffled.filter((x) => x === 1)).toHaveLength(1)
+      expect(shuffled.filter((x) => x === 2)).toHaveLength(2)
+      expect(shuffled.filter((x) => x === 3)).toHaveLength(3)
     })
 
     it('should work with different types', () => {
@@ -178,7 +168,7 @@ describe('utils', () => {
       // This test may rarely fail due to randomness
       const original = [1, 2, 3, 4, 5]
       const results = new Set()
-      
+
       // Run shuffle multiple times
       for (let i = 0; i < 20; i++) {
         const shuffled = shuffleList(original)
@@ -192,9 +182,9 @@ describe('utils', () => {
     it('should not modify the original array', () => {
       const original = [1, 2, 3, 4, 5]
       const originalCopy = [...original]
-      
+
       shuffleList(original)
-      
+
       expect(original).toEqual(originalCopy)
     })
   })
@@ -212,9 +202,9 @@ describe('utils', () => {
 
     it('should make GET request with config', async () => {
       const mockResponse = { data: { result: 'success' }, status: 200 }
-      const config = { 
-        timeout: 5000, 
-        headers: { 'X-Custom': 'test' } 
+      const config = {
+        timeout: 5000,
+        headers: { 'X-Custom': 'test' },
       }
       mockAxios.get.mockResolvedValueOnce(mockResponse)
 
@@ -229,10 +219,10 @@ describe('utils', () => {
         id: number
         name: string
       }
-      
-      const mockResponse = { 
-        data: { id: 1, name: 'test' } as ApiResponse, 
-        status: 200 
+
+      const mockResponse = {
+        data: { id: 1, name: 'test' } as ApiResponse,
+        status: 200,
       }
       mockAxios.get.mockResolvedValueOnce(mockResponse)
 
@@ -253,14 +243,14 @@ describe('utils', () => {
       // Array response
       const arrayResponse = { data: [1, 2, 3], status: 200 }
       mockAxios.get.mockResolvedValueOnce(arrayResponse)
-      
+
       const arrayResult = await axiosGet<number[]>('http://example.com/array')
       expect(arrayResult.data).toEqual([1, 2, 3])
 
       // Null response
       const nullResponse = { data: null, status: 200 }
       mockAxios.get.mockResolvedValueOnce(nullResponse)
-      
+
       const nullResult = await axiosGet('http://example.com/null')
       expect(nullResult.data).toBeNull()
     })
@@ -270,7 +260,7 @@ describe('utils', () => {
       const complexConfig = {
         timeout: 10000,
         headers: {
-          'Authorization': 'Bearer token',
+          Authorization: 'Bearer token',
           'Content-Type': 'application/json',
         },
         params: { page: 1, limit: 10 },

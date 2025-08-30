@@ -47,7 +47,7 @@ describe('helpers', () => {
       const result = removeDuplicateArchiversByPubKey(archivers)
 
       expect(result).toHaveLength(5)
-      const keys = result.map(a => a.publicKey)
+      const keys = result.map((a) => a.publicKey)
       expect(keys).toEqual(['A', 'B', 'C', 'D', 'E'])
     })
 
@@ -231,9 +231,7 @@ describe('helpers', () => {
       const invalidArchiver = { ip: '', port: 8080, publicKey: 'key' }
       sanitizeArchiverList([invalidArchiver])
 
-      expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Invalid archiver:')
-      )
+      expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Invalid archiver:'))
     })
 
     it('should handle empty array', () => {
