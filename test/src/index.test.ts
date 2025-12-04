@@ -8,7 +8,7 @@ jest.mock('axios', () => ({
   get: jest.fn(),
 }))
 
-jest.mock('@shardeum-foundation/lib-crypto-utils', () => ({
+jest.mock('@shardus/lib-crypto-utils', () => ({
   init: jest.fn(),
   verifyObj: jest.fn(),
   SignedObject: jest.fn(),
@@ -16,7 +16,7 @@ jest.mock('@shardeum-foundation/lib-crypto-utils', () => ({
 
 // Import after mocking
 import { getArchiverList, setupArchiverDiscovery, getFromArchiver, getFinalArchiverList } from '../../src/index'
-import * as crypto from '@shardeum-foundation/lib-crypto-utils'
+import * as crypto from '@shardus/lib-crypto-utils'
 import { axiosGet, shuffleList } from '../../src/utils'
 import { Archiver, ArchiverListResponse } from '../../src/types'
 import * as fs from 'fs'
@@ -406,7 +406,7 @@ describe('index tests', () => {
         const { setupArchiverDiscovery: setupFresh, getFinalArchiverList: getFinalFresh } = require('../../src/index')
 
         // Re-setup mocks for the fresh modules
-        const freshCrypto = require('@shardeum-foundation/lib-crypto-utils')
+        const freshCrypto = require('@shardus/lib-crypto-utils')
         freshCrypto.init = jest.fn()
         freshCrypto.verifyObj = jest.fn()
 

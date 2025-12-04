@@ -60,20 +60,20 @@ As mentioned above, the link to the remote config file is picked from the same `
 
 The final list of archivers is created by shuffling and concatenating the independent lists obtained from each source. If the final list of archivers is empty, the node logs an error and exits.
 
-> Note: The `setupArchiverDiscovery` function accepts an optional `hashKey` parameter. The `hashKey` parameter is used to initialise the `@shardeum-foundation/crypto-utils` module. The crypto utils module is used to verify the response from the archiver. If the `hashKey` is not provided, the default hash key is used. (Default `hashKey`: `69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc`)
+> Note: The `setupArchiverDiscovery` function accepts an optional `hashKey` parameter. The `hashKey` parameter is used to initialise the `@shardus/crypto-utils` module. The crypto utils module is used to verify the response from the archiver. If the `hashKey` is not provided, the default hash key is used. (Default `hashKey`: `69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc`)
 
 ## Usage
 
 ### Install the module
 
 ```bash
-npm i @shardeum-foundation/lib-archiver-discovery
+npm i @shardus/lib-archiver-discovery
 ```
 
 ### Initialising the module
 
 ```ts
-import { setupArchiverDiscovery, getFromArchiver } from '@shardeum-foundation/lib-archiver-discovery'
+import { setupArchiverDiscovery, getFromArchiver } from '@shardus/lib-archiver-discovery'
 
 // This function throws an exception if it could not find any archiver across different config
 // sources (or) if no archivers responded when fetching the active archiver list.

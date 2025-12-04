@@ -109,7 +109,7 @@ npx jest test/src/specific-test.test.ts
 
 ## Important Notes
 
-- The library uses `@shardeum-foundation/lib-crypto-utils` for signature verification
+- The library uses `@shardus/lib-crypto-utils` for signature verification
 - Default hash key is provided but should be overridden in production
 - All archiver responses must be signed objects (`crypto.SignedObject`)
 - The library throws errors if no archivers are found or none respond
