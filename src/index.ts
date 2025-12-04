@@ -1,4 +1,4 @@
-import * as crypto from '@shardeum-foundation/lib-crypto-utils'
+import * as crypto from '@shardus/lib-crypto-utils'
 import { AxiosRequestConfig } from 'axios'
 import { readConfigFromFile, removeDuplicateArchiversByPubKey, sanitizeArchiverList } from './helpers'
 import { fetchArchiverListFromConfig, fetchArchiverListFromEnv, fetchArchiverListFromRemoteOrCache } from './sources'
